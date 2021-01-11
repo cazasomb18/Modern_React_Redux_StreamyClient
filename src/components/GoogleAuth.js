@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { signIn, signOut } from '../actions';
 
 class GoogleAuth extends React.Component {
@@ -31,7 +32,7 @@ class GoogleAuth extends React.Component {
 
 	onAuthChange = isSignedIn => {
 			if (isSignedIn) {
-				this.props.signIn();
+				this.props.signIn(this.auth.currentUser.get().getId());
 			} else {
 				this.props.signOut();
 			}
@@ -54,7 +55,7 @@ class GoogleAuth extends React.Component {
 			return (
 			<button 
 				onClick={this.onSignInClick} 
-				className="ui red google button"
+				className="ui green google button"
 			>
 				<i className="google icon"/>
 				Sign In with Google
