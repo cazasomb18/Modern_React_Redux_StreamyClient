@@ -6,12 +6,22 @@ import { fetchStream } from '../../actions';
 class StreamShow extends React.Component {
 	componentDidMount(){
 		this.props.fetchStream(this.props.match.params.id);
-
 	}
 	render(){
-		return <div>{this.props.stream.title}</div>
+		if (!this.props.stream) {
+			return <div>Loading...</div>
+		}
+
+		const { title, description } = this.props.stream;
+
+		return (
+			<div>
+				<h1>{title}</h1>
+				<h5>{description}</h5>
+			</div>
+		);
 	}
-};
+}
 
 const mapStateToProps = (state, ownProps) => {
 	const id = ownProps.match.params.id;
@@ -20,5 +30,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
 	mapStateToProps, 
-	{fetchStream}
+	{ fetchStream }
 )(StreamShow);
